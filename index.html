@@ -208,8 +208,8 @@
                         tX = 0,
                         tY = 10,
                         index = 0; //滚轮初始值
-                    alert('请使用鼠标滚轮或触摸屏滚动页面！');
                     document.ontouchstart = function (e) {
+                        alert('请使用鼠标滚轮或触摸屏滚动页面！');
                         clearInterval(obox.timer);
                         e = e || window.event;
                         var sX = e.clientX,
