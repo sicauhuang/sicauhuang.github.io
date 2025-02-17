@@ -208,12 +208,12 @@
                         tX = 0,
                         tY = 10,
                         index = 0; //滚轮初始值
-                    document.addEventListener('touchstart', function (e) {
+                    document.addEventListener('pointerdown', function (e) {
                         clearInterval(obox.timer);
                         e = e || window.event;
                         var sX = e.clientX,
                             sY = e.clientY;
-                        document.addEventListener('touchmove', function (e) {
+                        document.addEventListener('pointermove', function (e) {
                             e = e || window.event;
                             var nX = e.clientX,
                                 nY = e.clientY;
@@ -227,9 +227,9 @@
                             sX = nX;
                             sY = nY;
                         });
-                        document.addEventListener('touchend', function () {
-                            document.removeEventListener('touchmove', arguments.callee);
-                            this.ontouchmove = null;
+                        document.addEventListener('pointerup', function () {
+                            document.removeEventListener('pointermove', arguments.callee);
+                            this.onpointermove = null;
                             obox.timer = setInterval(function () {
                                 desX *= 0.95;
                                 desY *= 0.95;
