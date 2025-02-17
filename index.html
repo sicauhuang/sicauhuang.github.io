@@ -160,9 +160,7 @@
         </audio>
         <!-- 相册 -->
         <div id="box">
-            <div>
-                
-            </div>
+            <div></div>
             <div></div>
             <div></div>
             <div></div>
@@ -210,12 +208,12 @@
                         tX = 0,
                         tY = 10,
                         index = 0; //滚轮初始值
-                    document.onmousedown = function (e) {
+                    document.touchstart = function (e) {
                         clearInterval(obox.timer);
                         e = e || window.event;
                         var sX = e.clientX,
                             sY = e.clientY;
-                        this.onmousemove = function (e) {
+                        this.touchmove = function (e) {
                             e = e || window.event;
                             var nX = e.clientX,
                                 nY = e.clientY;
@@ -229,7 +227,7 @@
                             sX = nX;
                             sY = nY;
                         };
-                        this.onmouseup = function () {
+                        this.touchend = function () {
                             this.onmousemove = this.onmouseup = null;
                             obox.timer = setInterval(function () {
                                 desX *= 0.95;
