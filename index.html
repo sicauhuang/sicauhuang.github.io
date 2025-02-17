@@ -208,12 +208,12 @@
                         tX = 0,
                         tY = 10,
                         index = 0; //滚轮初始值
-                    document.touchstart = function (e) {
+                    document.ontouchstart = function (e) {
                         clearInterval(obox.timer);
                         e = e || window.event;
                         var sX = e.clientX,
                             sY = e.clientY;
-                        this.touchmove = function (e) {
+                        this.ontouchmove = function (e) {
                             e = e || window.event;
                             var nX = e.clientX,
                                 nY = e.clientY;
@@ -227,8 +227,8 @@
                             sX = nX;
                             sY = nY;
                         };
-                        this.touchend = function () {
-                            this.onmousemove = this.onmouseup = null;
+                        this.ontouchend = function () {
+                            this.ontouchmove = null;
                             obox.timer = setInterval(function () {
                                 desX *= 0.95;
                                 desY *= 0.95;
@@ -255,16 +255,16 @@
                         index < -1050 && (index = -1050);
                         document.body.style.perspective = 1000 + index + 'px';
                     });
-                    function mousewheel(obj, fn) {
-                        document.onmousewheel === null
-                            ? (obj.onmousewheel = fn)
-                            : addEvent(obj, 'DOMMouseScroll', fn);
-                    }
-                    function addEvent(obj, eName, fn) {
-                        obj.attachEvent
-                            ? obj.attachEvent('on' + eName, fn)
-                            : obj.addEventListener(eName, fn);
-                    }
+                    // function mousewheel(obj, fn) {
+                    //     document.onmousewheel === null
+                    //         ? (obj.onmousewheel = fn)
+                    //         : addEvent(obj, 'DOMMouseScroll', fn);
+                    // }
+                    // function addEvent(obj, eName, fn) {
+                    //     obj.attachEvent
+                    //         ? obj.attachEvent('on' + eName, fn)
+                    //         : obj.addEventListener(eName, fn);
+                    // }
                 }
                 init();
             };
