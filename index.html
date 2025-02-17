@@ -1,1 +1,276 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: #fff4f3;
+                overflow: hidden; /* 隐藏页面溢出部分，避免樱花雨超出页面范围显示异常 */
+                cursor: pointer; /* 鼠标指针变为指针样式，提示可点击 */
+            }
+            body {
+                display: flex;
+                perspective: 1000px;
+                transform-style: preserve-3d;
+                /* background-image: url(./img/3.png); */
+                background: #0c0c0c;
+                height: 100%;
+                width: 100%;
+            }
+            #box {
+                z-index: 9999;
+                position: relative;
+                display: flex;
+                width: 130px;
+                height: 200px;
+                margin: auto;
+                transform-style: preserve-3d;
+                transform: rotateX(-10deg);
+            }
+            #box > div {
+                transform-style: preserve-3d;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                line-height: 200px;
+                font-size: 50px;
+                text-align: center;
+                box-shadow: 0 0 10px #fff;
+                -webkit-box-reflect: below 10px -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 40%, rgba(
+                                0,
+                                0,
+                                0,
+                                0.8
+                            )
+                            100%);
+            }
+
+            #box p {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                margin: auto;
+                width: 1200px;
+                height: 1200px;
+                background: -webkit-radial-gradient(
+                    center center,
+                    600px 600px,
+                    rgba(50, 50, 50, 1),
+                    rgba(0, 0, 0, 0)
+                );
+                border-radius: 50%;
+                transform: rotateX(90deg) translate3d(-600px, 0, -105px);
+            }
+            /* 下雨特效 */
+            #codepen-link {
+                position: absolute;
+                bottom: 30px;
+                right: 30px;
+                height: 40px;
+                width: 40px;
+                z-index: 10;
+                border-radius: 50%;
+                box-sizing: border-box;
+                background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/logo.jpg');
+                background-position: center center;
+                background-size: cover;
+                opacity: 0.5;
+                -webkit-transition: all 0.25s;
+                transition: all 0.25s;
+            }
+
+            #codepen-link:hover {
+                opacity: 0.8;
+                box-shadow: 0 0 6px #efefef;
+            }
+
+            /* 定义樱花的样式 */
+            .sakura {
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                background-image: url('https://img.icons8.com/emoji/48/cherry-blossom.png');
+                /* 这里假设你有一张樱花的图片，你可以替换为真实的樱花图片链接或者本地路径，若没有可去掉背景图片相关设置 */
+                background-size: cover;
+                animation: fall 8s linear infinite; /* 应用下落动画，持续8秒，线性运动，无限循环 */
+                opacity: 0; /* 初始透明度为0，实现渐现效果 */
+                pointer-events: none; /* 让樱花元素不响应鼠标事件，避免影响点击效果 */
+            }
+
+            /* 定义樱花下落的动画关键帧 */
+            @keyframes fall {
+                0% {
+                    /* 随机设置起始位置（在页面上方区域） */
+                    transform: translate(-50% + (Math.random() * 100%) - 50%, -100%);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                100% {
+                    /* 当到达页面底部时，重新回到页面上方的随机位置，实现循环 */
+                    transform: translate(-50% + (Math.random() * 100%) - 50%, -100%);
+                    opacity: 0;
+                }
+            }
+
+            /* 定义花朵开放的动画关键帧，这里简单模拟从中心展开的效果 */
+            @keyframes bloom {
+                0% {
+                    transform: scale(0);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            /* 定义点击后出现的花朵元素样式 */
+            .bloom-flower {
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                background-image: url('https://img.icons8.com/emoji/48/cherry-blossom.png');
+                /* 这里假设你有一张花朵开放状态的图片，可替换为合适的图片资源 */
+                background-size: cover;
+                animation: bloom 1s ease-in-out; /* 应用花朵开放动画，持续1秒，缓入缓出效果 */
+                display: none; /* 初始隐藏，点击后显示 */
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 音乐部分 -->
+        <audio autoplay="autopaly">
+            <source src="renxi.mp3" type="audio/mp3" />
+        </audio>
+        <!-- 相册 -->
+        <div id="box">
+            <div>
+                
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <p></p>
+        </div>
+        <!-- 流星 -->
+        <div class="stars">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+        </div>
+        <script>
+            window.onload = function () {
+                function init() {
+                    var obox = document.getElementById('box'),
+                        aDiv = obox.getElementsByTagName('div');
+
+                    for (var i = 0; i < aDiv.length; i++) {
+                        aDiv[i].style.background = 'url(img/' + (i + 1) + '.jpg) center/cover';
+                        aDiv[i].style.transform =
+                            'rotateY(' + i * 36 + 'deg) translate3d(0,0,350px)';
+                        aDiv[i].style.transition = 'transform 1s ' + (aDiv.length - i) * 0.2 + 's';
+                    }
+                    var sX,
+                        sY,
+                        nX,
+                        nY,
+                        desX = 0,
+                        desY = 0,
+                        tX = 0,
+                        tY = 10,
+                        index = 0; //滚轮初始值
+                    document.onmousedown = function (e) {
+                        clearInterval(obox.timer);
+                        e = e || window.event;
+                        var sX = e.clientX,
+                            sY = e.clientY;
+                        this.onmousemove = function (e) {
+                            e = e || window.event;
+                            var nX = e.clientX,
+                                nY = e.clientY;
+                            // 当前点的坐标和前一点的坐标差值
+                            desX = nX - sX;
+                            desY = nY - sY;
+                            tX += desX * 0.1;
+                            tY += desY * 0.1;
+
+                            obox.style.transform = 'rotateX(' + -tY + 'deg) rotateY(' + tX + 'deg)';
+                            sX = nX;
+                            sY = nY;
+                        };
+                        this.onmouseup = function () {
+                            this.onmousemove = this.onmouseup = null;
+                            obox.timer = setInterval(function () {
+                                desX *= 0.95;
+                                desY *= 0.95;
+                                tX += desX * 0.1;
+                                tY += desY * 0.1;
+                                obox.style.transform =
+                                    'rotateX(' + -tY + 'deg) rotateY(' + tX + 'deg)';
+                                if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
+                                    clearInterval(obox.timer);
+                                }
+                            }, 13);
+                        };
+                        return false;
+                    };
+                    //滚轮放大缩小
+                    mousewheel(document, function (e) {
+                        e = e || window.event;
+                        var d = e.wheelDelta / 120 || -e.detail / 3;
+                        if (d > 0) {
+                            index -= 20;
+                        } else {
+                            index += 30;
+                        }
+                        index < -1050 && (index = -1050);
+                        document.body.style.perspective = 1000 + index + 'px';
+                    });
+                    function mousewheel(obj, fn) {
+                        document.onmousewheel === null
+                            ? (obj.onmousewheel = fn)
+                            : addEvent(obj, 'DOMMouseScroll', fn);
+                    }
+                    function addEvent(obj, eName, fn) {
+                        obj.attachEvent
+                            ? obj.attachEvent('on' + eName, fn)
+                            : obj.addEventListener(eName, fn);
+                    }
+                }
+                init();
+            };
+        </script>
+        <script src="./js/script.js" />
+    </body>
+</html>
