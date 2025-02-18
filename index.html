@@ -213,7 +213,7 @@
                         e = e || window.event;
                         var sX = e.clientX,
                             sY = e.clientY;
-                        document.addEventListener('pointermove', function (e) {
+                        const move = function (e) {
                             e = e || window.event;
                             var nX = e.clientX,
                                 nY = e.clientY;
@@ -226,10 +226,11 @@
                             obox.style.transform = 'rotateX(' + -tY + 'deg) rotateY(' + tX + 'deg)';
                             sX = nX;
                             sY = nY;
-                        });
+                        };
+                        document.addEventListener('pointermove', move);
                         document.addEventListener('pointerup', function () {
-                            document.removeEventListener('pointermove', arguments.callee);
-                            this.onpointermove = null;
+                            document.removeEventListener('pointermove', move);
+                            // this.onpointermove = null;
                             obox.timer = setInterval(function () {
                                 desX *= 0.95;
                                 desY *= 0.95;
