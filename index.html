@@ -17,6 +17,7 @@
                 background-color: #fff4f3;
                 overflow: hidden; /* 隐藏页面溢出部分，避免樱花雨超出页面范围显示异常 */
                 cursor: pointer; /* 鼠标指针变为指针样式，提示可点击 */
+                touch-action: none;
             }
             body {
                 display: flex;
@@ -208,6 +209,9 @@
                         tX = 0,
                         tY = 10,
                         index = 0; //滚轮初始值
+                    document.addEventListener('pointercancel', function (e) {
+                        alert('取消了');
+                    });
                     document.addEventListener('pointerdown', function (e) {
                         clearInterval(obox.timer);
                         e = e || window.event;
